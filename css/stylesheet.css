@@ -1,0 +1,190 @@
+/* ===========================================
+		//author	: 	Joseph Appeah//
+		//desc		: 	lance css//
+============================================*/
+
+/*================================
+//fonts//
+================================*/
+@font-face {
+    font-family:Dancing Script;
+    src: url('../fonts/Dancing_Script/DancingScript-Regular.ttf');
+}
+
+@font-face {
+    font-family:Lobster;
+    src: url('../fonts/Lobster/Lobster-Regular.ttf');
+}
+
+@font-face {
+    font-family:Exo;
+    src: url('../fonts/Exo/Exo-Regular.ttf');
+}
+
+@font-face {
+    font-family:Josefin Sans;
+    src: url('../fonts/Josefin_Sans/JosefinSans-Regular.ttf');
+}
+
+@font-face {
+    font-family:Lato;
+    src: url('../fonts/Lato/Lato-Regular.ttf');
+}
+
+@font-face {
+    font-family:Pacifico;
+    src: url('../fonts/Pacifico/Pacifico-Regular.ttf');
+}
+
+@font-face {
+    font-family:Raleway;
+    src: url('../fonts/Raleway/Raleway-Light.ttf');
+}
+
+@font-face {
+    font-family:Athiti;
+    src: url('../fonts/Athiti/Athiti-Regular.ttf');
+}
+
+@font-face {
+    font-family:Coiny;
+    src: url('../fonts/Coiny/Coiny-Regular.ttf');
+}
+
+@font-face {
+    font-family:Jura;
+    src: url('../fonts/Jura/Jura-Medium.ttf');
+}
+
+@font-face {
+    font-family:Rajdhani;
+    src: url('../fonts/Rajdhani/Rajdhani-Regular.ttf');
+}
+
+/*================================
+//page//
+================================*/
+
+html, body{
+	height: 100% !important;
+	font-family:Athiti !important;
+}
+
+#header {
+	height: 100% !important;
+	margin-top: 0px !important;
+	background: white;/*url("../imgs/btc-img-dark.jpg") no-repeat fixed center; */
+}
+
+#lead-font {
+	font-size: 40px;
+	text-align: center !important;
+	color: #222;
+	font-family:Raleway !important;
+}
+
+#chance-text{
+	font-size: 45px;
+	text-align: center !important;
+	font-weight:bold;
+	font-family: Coiny;
+	color: #00aced;
+	text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.navbar-link {
+	font-family: Josefin Sans !important;
+	font-size: 17px;
+	text-align: center !important;
+	text-shadow: 1px 2px 1px #a6a6a6;
+	color: black;
+	margin-right: 40px !important;	
+	margin-top: 10px;	
+}
+
+.navbar-link:hover, .navbar-link:focus {
+	text-decoration: underline !important;
+	background: transparent !important;
+	color: black !important;
+}
+
+#find-out-why {
+	font-family: Josefin Sans !important;
+	font-size: 19px;
+	background: #0091EA;
+	border-radius: 2px;
+	color: white;
+	padding: 15px 40px 15px 40px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+}
+
+
+#find-out-why:hover , #find-out-why:focus{
+	text-decoration: none !important;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.navbar {
+	height:68px; 
+	border-bottom:1px solid #9e9e9e;
+	box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	background: #fafafa !important;
+}
+
+#sentiment-analysis{
+	padding-top: 130px;
+	border-top:1px solid #bdbdbd;
+	height: 100% !important;
+}
+
+#desc-font {
+	font-size: 35px;
+	text-align: left !important;
+	color: #222;
+}
+
+#twitter-icon{
+	font-size: 200px;
+	padding: 20px 20px 20px 20px;
+	border-radius: 10px;
+	margin-top: 10%;
+	color: #00aced;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	border: 1px solid #bdbdbd;
+	text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+#loading-icon{
+	font-size: 200px;
+	padding: 20px 20px 20px 20px;
+	border-radius: 10px;
+	margin-top: 10%;
+	color: #00aced;
+	text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+#tweet-display-card{
+	width: 90%;
+	height: 175px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	background: white;
+	margin:5% 5% 5% 5%;
+	font-size: 22px;
+	border-radius: 7px;
+	color: #616161;
+	border: 1px solid #bdbdbd;
+	padding: 30px 30px 30px 30px;
+}
+
+#tweet-display-card-tweet{
+	text-align: left;
+	border-right: 1px solid #E0E0E0;
+	height: 100%;
+}
+
+#tweet-display-card-rating{
+	padding-top: 25px;
+	color: #616161 !important;
+	font-size: 26px !important;
+}
