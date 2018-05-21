@@ -67,39 +67,122 @@
 
 html, body{
 	height: 100% !important;
-	font-family:Athiti !important;
+	font-family:Josefin Sans !important;
+	text-transform: uppercase;
 }
 
 #header {
 	height: 100% !important;
 	margin-top: 0px !important;
-	background: white;/*url("../imgs/btc-img-dark.jpg") no-repeat fixed center; */
+
+    background-image: url('../imgs/btc-background.jpeg') ;
+    background-color: rgba(237, 210, 104,0.9);/*rgba(255,255,255,0.6);*/
+    background-blend-mode: lighten;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
 }
 
+#footer {
+	height: 50% !important;
+	margin-top: 0px !important;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+
+    background-image: url('../imgs/btc-background.jpeg') ;
+    background-color: rgba(237, 210, 104,0.6);/*rgba(255,255,255,0.6);*/
+    background-blend-mode: lighten;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.loading-home {
+    background-image: url('../imgs/btc-background.jpeg') ;
+    background-color: rgba(237, 210, 104,0.9);/*rgba(255,255,255,0.6);*/
+    background-blend-mode: lighten;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.btc-image-bg {
+    background-image: url('../imgs/btc-background-two.jpg') ;
+    background-color: rgba(255,255,255,0.8);
+    background-blend-mode: lighten;
+    background-attachment: fixed;	
+    background-repeat: no-repeat;
+    background-position: center bottom;
+} 
+
 #lead-font {
-	font-size: 40px;
+	font-size: 50px;
 	text-align: center !important;
 	color: #222;
 	font-family:Raleway !important;
 }
 
 #chance-text{
-	font-size: 45px;
+	font-size: 30px;
 	text-align: center !important;
 	font-weight:bold;
 	font-family: Coiny;
-	color: #00aced;
+	color: green;
+	padding-bottom: 3px;
+}
+
+#loading {
+	font-size: 200px;
+	text-align: center !important;
+	font-weight:bold;
+	font-family: Coiny;
+	color: #424242;
 	text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.sub-sub-heading {
+	margin-top: 30px;
+	font-size: 17px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.sub-heading {
+	text-align: center;
+	font-size: 30px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 15px;
+	padding-top: 20px;
+	background: white !important;
+	margin-bottom: 0px !important
+}
+
+#prediction-paragraph{
+	text-align: left;
+	font-size: 26px;
+}
+
+#navbar-brand {
+	padding-top: 33px;
+}
+
+.center-to-page {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
 }
 
 .navbar-link {
+	background: transparent;
 	font-family: Josefin Sans !important;
 	font-size: 17px;
 	text-align: center !important;
 	text-shadow: 1px 2px 1px #a6a6a6;
 	color: black;
 	margin-right: 40px !important;	
-	margin-top: 10px;	
+	margin-top: 20px;	
 }
 
 .navbar-link:hover, .navbar-link:focus {
@@ -123,33 +206,45 @@ html, body{
 #find-out-why:hover , #find-out-why:focus{
 	text-decoration: none !important;
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	border: 1px solid black;
 }
 
 .navbar {
-	height:68px; 
-	border-bottom:1px solid #9e9e9e;
+	border-bottom:1px solid black;
+	height: 90px;
+	border-top:1px solid #a6a6a6;
 	box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-	background: #fafafa !important;
+
+	background-image: url('../imgs/btc-background.jpeg') ;
+    background-color: rgba(237, 210, 104,0.7);/*rgba(255,255,255,0.6);*/
+    background-blend-mode: lighten;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
-#sentiment-analysis{
-	padding-top: 130px;
-	border-top:1px solid #bdbdbd;
+
+#lstm-analysis, #regression-analysis,#sentiment-analysis {
 	height: 100% !important;
+	margin-top: 0px!important;
 }
 
-#desc-font {
+#desc-font{
 	font-size: 35px;
-	text-align: left !important;
+	text-align: center !important;
 	color: #222;
 }
 
+#description {
+	text-align: justify !important;
+}
+
 #twitter-icon{
-	font-size: 200px;
+	font-size: 70px;
 	padding: 20px 20px 20px 20px;
-	border-radius: 10px;
-	margin-top: 10%;
+	border-radius: 100px;
+	margin-top: 30%;
 	color: #00aced;
+	background: white;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	border: 1px solid #bdbdbd;
 	text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -162,6 +257,11 @@ html, body{
 	margin-top: 10%;
 	color: #00aced;
 	text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.description-diagram{
+	width: 300px !important;
+	height: 230px !important;
 }
 
 #tweet-display-card{
@@ -187,4 +287,84 @@ html, body{
 	padding-top: 25px;
 	color: #616161 !important;
 	font-size: 26px !important;
+}
+
+#section-divisions{
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+#footer h3 {
+  margin-bottom: 30px;
+}
+#footer .footer-above {
+  padding-top: 50px;
+}
+#footer .footer-col {
+  margin-bottom: 50px;
+}
+#footer .footer-below {
+  padding: 25px 0;
+}
+
+
+
+@keyframes lds-ripple {
+  0% {
+    top: 96px;
+    left: 96px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 18px;
+    left: 18px;
+    width: 156px;
+    height: 156px;
+    opacity: 0;
+  }
+}
+@-webkit-keyframes lds-ripple {
+  0% {
+    top: 96px;
+    left: 96px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 18px;
+    left: 18px;
+    width: 156px;
+    height: 156px;
+    opacity: 0;
+  }
+}
+.lds-ripple {
+  position: relative;
+}
+.lds-ripple div {
+  box-sizing: content-box;
+  position: absolute;
+  border-width: 4px;
+  border-style: solid;
+  opacity: 1;
+  border-radius: 50%;
+  -webkit-animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(1) {
+  border-color: #3be8b0;
+}
+.lds-ripple div:nth-child(2) {
+  border-color: #1aafd0;
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+.lds-ripple {
+  width: 200px !important;
+  height: 200px !important;
+  -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+  transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
 }
