@@ -1,4 +1,4 @@
-server 			= "http://ec2-13-59-97-185.us-east-2.compute.amazonaws.com:3000";
+server 			= "https://ec2-13-59-97-185.us-east-2.compute.amazonaws.com:3000";
 displayTweets 	= [];
 sentiment_text 		= "NEUTRAL";
 sentiment_color  	= "#FFC107";
