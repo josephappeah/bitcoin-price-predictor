@@ -1,0 +1,20 @@
+{
+  "name": "btc-project",
+  "version": "1.0.0",
+  "description": "btc price predictor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephappeah/bitcoin-price-predictor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephappeah/bitcoin-price-predictor/issues"
+  },
+  "homepage": "https://github.com/josephappeah/bitcoin-price-predictor#readme"
+}
