@@ -53,15 +53,14 @@ def obtain_tweet_sentiment(data):
 			#
 			compound_sentiment_val 	= get_sentiment_value(tweet)['compound']
 			normalized_value		= normalize_compound_score_to_one(compound_sentiment_val)
-			
-			data_with_sentiments.append((item[0], item[1], normalized_value))
 			#
-			#update_daily_avg(date, normalized_value)
+			data_with_sentiments.append((item[0], item[1], normalized_value))
+
 
 	return data_with_sentiments
 
 
-def get_average_sentiment(data):
+def get_average_sentiment_from_tweets(data):
 	#
 	sent_vals 	= []
 

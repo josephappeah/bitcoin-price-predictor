@@ -8,7 +8,7 @@ var path        = require('path');
 var service     = express();
 
 // send utils to client
-service.use(express.static('client'));
+service.use(express.static('pages'));
 
 // load home page
 /*============================================================================================================

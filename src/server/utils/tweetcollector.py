@@ -1,10 +1,13 @@
-# wraps the TwitterSearch python library
+#==================================================================================
+# author 	: joseph appeah
+# date  	: 05/01/2018
+# desc  	: python tweet collector
+#==================================================================================
 
-#==================================================================================
-# author: joseph appeah
-# date  : 05/01/2018
-# desc  : python tweet collector & analyzer
-#==================================================================================
+
+# This is a wrapper for the TwitterSearch python library for the purposed of the 
+# project. It has all params for collecting tweets about bitcoin based on filters 
+# specified for the project.
 
 
 # requirements ====================================================================
@@ -15,10 +18,9 @@ import datetime
 #==================================================================================
 
 
-
 # essentials ======================================================================
 
-# load twitter api configs from config file
+# load twitter api configs from local config file
 with open('configs.json') as configs_file:    
     configs = json.load(configs_file)
 
@@ -42,6 +44,9 @@ keywords = ['BTC',
 
 #
 def parse_datetime_to_parts(datetime):
+	'''
+		parses date time from the twitter api into parts
+	'''
 	#
 	datetime_parts 	= []
 	
@@ -56,9 +61,14 @@ def parse_datetime_to_parts(datetime):
 	#
 	return datetime_parts
 
+
 # collects all tweets
 def collect_tweets():
-	print ("\ncollecting tweets...")
+	'''
+		collects the tweets from twitter. only gets the last 500 which
+		is the maximum allowed by the api.
+	'''
+
 	#
 	try:
 
@@ -67,10 +77,7 @@ def collect_tweets():
 	    tso.set_keywords(keywords) 
 	    tso.set_language('en')
 	    tso.set_include_entities(False)
-	    tso.set_count(100)
-
-	    #
-	    #tso.set_since(since)
+	    tso.set_count(500)
 
 	    #
 	    ts = TwitterSearch.TwitterSearch (
@@ -80,17 +87,20 @@ def collect_tweets():
 	        access_token_secret = configs['access_token_secret']
 	     )
 
-
 	    # 
 	    tweets 					= []
+
+	    #
 	    for tweet in ts.search_tweets_iterable(tso):
 	    	tweets.append((tweet['created_at'], tweet['text']))
 
 	except TwitterSearch.TwitterSearchException as e:
 		None
 
+	#
 	return tweets
 
+#==================================================================================
 
 
 

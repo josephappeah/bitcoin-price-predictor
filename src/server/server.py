@@ -1,7 +1,18 @@
 #========================================================================
 # author 					: joseph appeah
-# desc 						: 
+# desc 						: backend server for btc price predictor
 #========================================================================
+
+#========================================================================
+# to - do 
+#========================================================================
+'''
+- set up sample tweet server
+- set up sentiment provider
+- find sentiment json creation
+'''
+#========================================================================
+
 
 #
 from flask import Flask
@@ -16,9 +27,9 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from flask_cors import CORS
 
 #
-server 			= Flask(__name__)
+app 			= Flask(__name__)
 server_port 	= 3000
-CORS(server)
+CORS(app)
 
 #========================================================================
 
@@ -33,22 +44,29 @@ def import_sentiments():
 # endpoints
 #========================================================================
 
+
+@app.route("/get-sample-tweets")
+def get_sample_tweets():
+	return "sample tweets"
+
+
 #
-@server.route("/get-sentiments")
+@app.route("/get-sentiments")
 def get_sentiments():
 	#
 	return json.dumps(import_sentiments())
 
 
 #
-@server.route("/get-btc-status")
-def get_btc_status():
+#@app.route("/get-startup-utils")
+@app.route("/get-btc-status")
+def get_startup_utils():
 	#
 	return json.dumps({"price" : 500, "sentiment" : 0.56, "prediction" : True})
 
 #
-@server.route("/get-sentiment-graph-data")
-def get_sentiment_graph_data():
+@app.route("/get-sentiment-data")
+def get_sentiment_data():
 	#
 	sentiments 	= import_sentiments()
 	result 		= {}
@@ -72,4 +90,4 @@ def get_sentiment_graph_data():
 
 #
 if __name__ == 'main':
-	server.run(port=server_port)
+	app.run(port=server_port)
