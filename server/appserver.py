@@ -13,10 +13,12 @@ import os.path
 import glob
 import datetime
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from flask_cors import CORS
 
 #
 server 			= Flask(__name__)
 server_port 	= 3000
+CORS(server)
 
 #========================================================================
 
