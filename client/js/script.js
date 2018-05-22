@@ -1,8 +1,8 @@
-server 				= "http://localhost:3000";
+server 			= "http://ec2-13-59-97-185.us-east-2.compute.amazonaws.com:3000";
 displayTweets 		= [];
 sentiment_text 		= "NEUTRAL";
 sentiment_color  	= "#FFC107";
-price_text 			= "$---";
+price_text 		= "$---";
 price_color  		= "#FFC107";
 prediction_text 	= "RISE";
 prediction_color  	= "#FFC107";

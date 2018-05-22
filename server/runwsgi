@@ -1,1 +1,1 @@
-uwsgi --socket 0.0.0.0:3000 --protocol=http -w wsgi
+uwsgi --http 0.0.0.0:3000 --module appserver --callab server

@@ -71,4 +71,5 @@ def get_sentiment_graph_data():
 	return json.dumps(result)
 
 #
-server.run(port=server_port)
+if __name__ == 'main':
+	server.run(port=server_port)
