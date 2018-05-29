@@ -21,7 +21,7 @@ import datetime
 # essentials ======================================================================
 
 # load twitter api configs from local config file
-with open('configs.json') as configs_file:    
+with open('../configs.json') as configs_file:    
     configs = json.load(configs_file)
 
 # keywords for twitter search
@@ -68,6 +68,8 @@ def collect_tweets():
 		collects the tweets from twitter. only gets the last 500 which
 		is the maximum allowed by the api.
 	'''
+	# 
+	tweets 						= []
 
 	#
 	try:
@@ -77,7 +79,7 @@ def collect_tweets():
 	    tso.set_keywords(keywords) 
 	    tso.set_language('en')
 	    tso.set_include_entities(False)
-	    tso.set_count(500)
+	    tso.set_count(100)
 
 	    #
 	    ts = TwitterSearch.TwitterSearch (
@@ -87,25 +89,18 @@ def collect_tweets():
 	        access_token_secret = configs['access_token_secret']
 	     )
 
-	    # 
-	    tweets 					= []
-
 	    #
 	    for tweet in ts.search_tweets_iterable(tso):
 	    	tweets.append((tweet['created_at'], tweet['text']))
 
 	except TwitterSearch.TwitterSearchException as e:
+		print e
 		None
 
 	#
 	return tweets
 
 #==================================================================================
-
-
-
-
-
 
 
 

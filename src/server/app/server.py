@@ -13,8 +13,10 @@
 '''
 #========================================================================
 
+import sys
+sys.path.insert(0, '../utils/')
 
-#
+# requirements ======================================================
 from flask import Flask
 import json
 import requests
@@ -25,6 +27,8 @@ import glob
 import datetime
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from flask_cors import CORS
+#from tweetcollector import *
+from tweetparser import *
 
 #
 app 			= Flask(__name__)
@@ -35,7 +39,7 @@ CORS(app)
 
 def import_sentiments():
 	#
-	with open('sentiments.json','r') as sentiments_file:    
+	with open('../storage/sentiments.json','r') as sentiments_file:    
 		sentiments = json.load(sentiments_file)
 	#
 	return sentiments
@@ -47,7 +51,30 @@ def import_sentiments():
 
 @app.route("/get-sample-tweets")
 def get_sample_tweets():
-	return "sample tweets"
+	#
+	result = {}
+
+	#
+	with open('../storage/sample_tweets.txt','r') as sample_tweets:
+		#
+		file_content 	= sample_tweets.readlines()
+		file_content 	= [line.strip() for line in file_content]
+		tw_count 		= 1
+		
+		# parse each line for date, hourly sentiments
+		for line in file_content:
+			entry      = {}
+			line_parts = line.split("SPLIT-DELIMITER")
+			tweet 	   = line_parts[0]
+			rating     = line_parts[1]
+
+			entry['tweet'] 		= tweet
+			entry['rating']  	= round(float(rating),3)
+			result[tw_count] 	= entry
+			tw_count += 1
+
+	#
+	return json.dumps(result)
 
 
 #
@@ -58,11 +85,21 @@ def get_sentiments():
 
 
 #
-#@app.route("/get-startup-utils")
-@app.route("/get-btc-status")
+@app.route("/get-todays-predictions")
 def get_startup_utils():
 	#
-	return json.dumps({"price" : 500, "sentiment" : 0.56, "prediction" : True})
+	#current_sentiment = float(get_average_sentiment_from_tweets(obtain_tweet_sentiment(collect_tweets())))
+	current_sentiment = 0
+	#
+	return json.dumps({"price" : 500, "sentiment" : current_sentiment, "prediction" : True})
+
+
+@app.route("/get-current-sentiment-value")
+def get_current_sentiment_val():
+	#
+	current_sentiment = float(get_average_sentiment_from_tweets(obtain_tweet_sentiment(collect_tweets())))
+	#
+	return json.dumps({"current_sentiment" : current_sentiment})
 
 #
 @app.route("/get-sentiment-data")
@@ -89,5 +126,8 @@ def get_sentiment_data():
 	return json.dumps(result)
 
 #
+'''
 if __name__ == 'main':
 	app.run(port=server_port)
+'''
+app.run(port=server_port)

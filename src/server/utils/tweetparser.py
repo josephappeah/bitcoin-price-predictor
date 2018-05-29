@@ -20,6 +20,7 @@ def clean_tweet(tweet):
 			new_tweet = tweet.encode('utf-16', errors='ignore')
 			new_tweet = tweet.replace('?', '')
 			new_tweet = new_tweet.replace(',', '.')
+			new_tweet = new_tweet.replace('\u2026', '')
 		except Exception as e:
 			None
 	else:
@@ -54,7 +55,7 @@ def obtain_tweet_sentiment(data):
 			compound_sentiment_val 	= get_sentiment_value(tweet)['compound']
 			normalized_value		= normalize_compound_score_to_one(compound_sentiment_val)
 			#
-			data_with_sentiments.append((item[0], item[1], normalized_value))
+			data_with_sentiments.append((item[0], tweet, normalized_value))
 
 
 	return data_with_sentiments
@@ -69,5 +70,9 @@ def get_average_sentiment_from_tweets(data):
 		sent_vals.append(float(item[2]))
 
 	#
-	return round(float(sum(sent_vals))/float(len(sent_vals)),2)
+	try:
+		avg = round(float(sum(sent_vals))/float(len(sent_vals)),3)
+	except:
+		avg = 0.000
+	return avg
 

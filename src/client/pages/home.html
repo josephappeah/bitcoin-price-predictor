@@ -44,8 +44,9 @@
                     </div>
 	                <div class="navbar-collapse collapse">
 	                    <ul class="nav navbar-nav navbar-right">
-	                        <li><a class="navbar-link" id="github" href="https://github.com/AgastyaSinha/Bitcoin-Price-Predictor">GITHUB</a></li>
+	                    	<li><a class="navbar-link" id="about">LIVE RESULTS & TESTING</a></li>
 	                        <li><a class="navbar-link" id="about">ABOUT</a></li>
+	                       	<li><a class="navbar-link" id="github" href="https://github.com/AgastyaSinha/Bitcoin-Price-Predictor">GITHUB</a></li>
 	                    </ul>
 	                </div>
                 </div>
@@ -77,6 +78,48 @@
         	</div>
         </div><!--/ Header -->
 
+
+
+        <!-- LSTM information -->
+        <aside ><p class="sub-heading" id="lstm-heading"> Live results & testing </p></aside>
+        <div class="container-fluid btc-image-bg" id="lstm-analysis">
+        	<div class="col-sm-12" style="height: 100%;">
+        		<div class="col-sm-6" id="section-divisions" style="border-right: 1px solid #e9e9e9; height: 100% !important;">
+        			<p class="sub-sub-heading" style="text-align: justify;"> LIVE RESULTS FROM OUR MODULES </p>
+        			<br/>
+        			<p id="description" >
+					In our system, we have two single learners: LSTM and polynomial regression models. Both of them work well individually and produce profits. In addition, they are combined into a single predictive module using the weighted average technique, in which the two individual predictions are weighted by the constant coefficients (whose sum adds up to one) and added together to produce a final prediction, typically known as ensemble averaging. In a naive case, it is possible to divide the coefficients equally. That is, assign the weight of 1/n to each of the n learners. However, a better approach, and the one that we use, is to derive these coefficients from the values of accuracies for each model, where accuracy is in regards to the training accuracy of the model. In the general case, the weight of model i is:
+					</p>
+					<br/>
+					<hr/>
+        			<br/>
+        			<p id="description"><b> the current prediction from our <a href="#lstm-heading"> lstm </a> module is $500</b></p>
+        			<br/>
+        			<p id="description"><b> the current prediction from our <a href="#polynomial-heading"> polynomial regression </a> module is $500</b></p>
+        			<br/>
+        			<p id="description"><b> based on our <a href="#sentiment-heading"> sentiment analysis </a> module, twitter sentiment is 0.5</b></p>
+        		</div>
+        		<div class="col-sm-6">
+        			<p class="sub-sub-heading" style="text-align: justify;"> TEST OUR MODULES </p>
+        			 <div class="col-sm-12" style="text-align: center; height: 55% !important;">
+
+			        <div class="col-sm-12 animated slideInDown" style="text-align: center; margin-top: 13%;">
+		        		<a id="find-out-why" href="#lstm-heading">RETRAIN OUR MACHINE LEARNING MODULES</a>
+		        	</div>
+
+		        	<div class="col-sm-12 animated slideInDown" style="text-align: center; margin-top: 13%;">
+        				<a id="find-out-why" href="#lstm-heading">GET CURRENT PREDICTIONS</a>
+        			</div>
+
+        			<div class="col-sm-12 animated slideInDown" style="text-align: center; margin-top: 13%;">
+        				<a id="find-out-why" href="#lstm-heading">GET TOMORROWS PREDICTION</a>
+        			</div>
+
+	        		</div>
+        		</div>
+        	</div>
+        </div>
+
         <!-- LSTM information -->
         <aside ><p class="sub-heading" id="lstm-heading"> Long Short-Term Memory (LSTM) Module</p></aside>
         <div class="container-fluid btc-image-bg" id="lstm-analysis">
@@ -84,12 +127,22 @@
         		<div class="col-sm-6" id="section-divisions" style="border-right: 1px solid #e9e9e9; height: 100% !important;">
         			<p class="sub-sub-heading" style="text-align: justify;"> HOW IT WORKS </p>
         			<br/>
-        			<p id="description"> the lstm module works by ... </p>
+        			<p id="description"> <a href="https://en.wikipedia.org/wiki/Long_short-term_memory">LSTM</a> stands for Long-short term memory and these type of neural networks introduce special memory gates which control the flow of information in the network and prevent exponential decay of the loss function by means of the control gates. The LSTM model developed for this project took in the best 17 features after performing Recursive Feature Elimination with Logistic regression and Extra trees regressor on 23 features. The last 560 days of Bitcoin data was extracted from Quandl.com, out of which the first 500 days were used for training. The next 30 days were used for validating the model to prevent overfitting and the last 30 days were used to test the prediction prowess of the model. The LSTM consisted of 2 layers, 400 memory cells and was trained for 270 Epochs. Figure 7 shows the test results of the LSTM model for the past 30 days. </p>
         			<br/>
+        			<p id="description">Neural networks are critical to machine intelligence as they allow the machines to interpret the data on their own. However, regular feedforward neural networks do not do so well when asked to form a context with past data. To tackle this problem, a different form on neural network is deployed, called the Recurrent neural network (RNN). Rather than each ‘neuron’ taking a fresh input, a neuron in RNN additionally takes the output from previous neurons as part of it’s input. This allows it to learn across sequence of data. However, RNNs are not good at remembering output of neurons after a limited number of time-steps back in the sequence.
+					</p>
+					<br/>
         			<p id="description"> the figures on the left show how our prediction compared with the actual btc/usd prices after backtesting.</p>
         		</div>
         		<div class="col-sm-6">
         			<p class="sub-sub-heading" style="text-align: justify;"> SAMPLE DATA & RESULTS </p>
+        			 <div class="col-sm-12" style="text-align: center; height: 55% !important;">
+
+
+	        				<p style="text-decoration: underline;">plot showing btc/usd closing price vs. LSTM PREDICTED PRICE obtained from backtesting</p>
+	        				<canvas id="lstm-chart" width="410" height="375" style="padding: 0px;"></canvas>
+
+	        		</div>
         		</div>
         	</div>
         </div>
@@ -132,22 +185,31 @@
 
 	        			<div class="col-sm-12" style="text-align: center; height: 55% !important;">
 	        				<p style="text-decoration: underline;">plot showing btc/usd closing price vs. twitter sentiments</p>
-	        				<canvas id="myChart" width="400" style="padding: 0px;"></canvas>
-	        				<p> correlation : 0.83 </p>
+	        				<canvas id="sentiment-chart" width="400" height="225" style="padding: 0px;"></canvas>
+	        				<!--<p> correlation : 0.83 </p>-->
 	        			</div>
 
 	        			<div class="col-sm-12" style="text-align: center; height: 25% !important;">
-	        				<p id="description" style="text-decoration: underline;"> what people are saying on twitter</p>
+	        				<p id="description" style="text-decoration: underline; text-align: center !important;"> what people are saying on twitter</p>
 	        				<div class="col-sm-3" style="text-align: center; height: 100%;">
 	        		 			<i id="twitter-icon" class="fab fa-twitter"></i>
 	        				</div>
 	        				<div class="col-sm-9">
-	        						<div id="sample-tweet-loading" class="lds-css ng-scope" style="margin-top: -13px;">
+	        						<!--<div id="sample-tweet-loading" class="lds-css ng-scope" style="margin-top: -13px;">
 										<div style="width:100%; height:100%" class="lds-ripple">
 											<div></div><div></div>
 										</div>
-									</div>
-	        						<div id="sample-tweet-cards" style="text-align: center; height: 100% !important;"></div>
+									</div>-->
+	        						<div id="sample-tweet-cards" style="text-align: center; height: 100% !important;">
+	        							<div id="tweet-display-card" class="col-sm-12 animated zoomIn">
+	        								<div id="tweet-display-card-tweet" class="col-sm-9">
+	        									<p> "An ever increasing problem. @cryptomanran - @jack …o #cryptocurrencies\u2026 https://t.co/2Y4VHE8mxv" </p>
+	        								</div>
+	        								<div id="tweet-display-card-rating" class="col-sm-3">
+	        									<p><b> 0.271 </b></p>
+	        								</div>
+	        							</div>
+	        						</div>
 	        				</div>
 	        			</div>
 
@@ -164,18 +226,55 @@
         		<div class="col-sm-6" id="section-divisions" style="border-right: 1px solid #e9e9e9; height: 100% !important;">
         			<p class="sub-sub-heading" style="text-align: left;"> HOW IT WORKS </p>
         			<br/>
-        			<p id="description"> the polynomial regression module works by ... </p>
+        			<p id="description"> The initial feature selection algorithm used to train our predictive models was originally a greedy algorithm known as Recursive Feature Elimination (RFE). This algorithm selected features by recursively iterating over the set of all features, and removing the ones that provided the least impact to the cost function, until the desired number of features is met. This algorithm is very brute force and is time costly. We propose a more robust algorithm known as Principal Component Analysis (PCA), which chooses <i>k</i>-features with the greatest variability, essentially finding k-dimensional feature vectors with the largest variance. 
+ </p>
+        			<br/>
+        			<p id="description">Originally, we were able to show training accuracy of our Polynomial Regression model by using a single feature, namely blockchain size, and training the model over 365 days. We have expanded on this considerably by adding multi-feature data capability, meaning that our model incorporates more than just blockchain size but also other features such as hashrate, number of transactions, etc. We used principal component analysis to choose from 13 different features, and found 6 features that had the largest eigenvalues (variability) and met a threshold variation ratio of 0.95 to choose the number of k features. Due to the increased model complexity, having multiple features, and each having polynomial degrees within the hypothesis function, overfitting has become a dominant concern.</p>
         			<br/>
         			<p id="description"> the figures on the left show how our prediction compared with the actual btc/usd prices after backtesting.</p>
         		</div>
         		<div class="col-sm-6">
         			<p class="sub-sub-heading" style="text-align: right;"> SAMPLE DATA & RESULTS </p>
+        			    <div class="col-sm-12" style="text-align: center; height: 55% !important;">
+
+
+	        				<p style="text-decoration: underline;">plot showing btc/usd closing price vs. POLYNOMIAL REGRESSION PREDICTED PRICE obtained from backtesting</p>
+	        				<canvas id="poly-chart" width="410" height="375" style="padding: 0px;"></canvas>
+
+	        		</div>
         		</div>
         	</div>
         </div>
 
-        <aside><p class="lead sub-heading" id="strategy-heading"> COMPARISON TO EXISTING STRATEGIES</p></aside>
-        <div class="container-fluid btc-image-bg" id="sentiment-analysis"></div>
+        <aside><p class="lead sub-heading" id="strategy-heading"> COMPARISON TO MOMENTUM TRADING STRATEGIES</p></aside>
+        <div class="container-fluid btc-image-bg" id="sentiment-analysis" style="height: 100%;">
+        	<div class="col-sm-12" style="height: 100%;">
+        		<div class="col-sm-6" id="section-divisions" style="border-right: 1px solid #e9e9e9; height: 100% !important;">
+        			<p class="sub-sub-heading" style="text-align: left;"> HOW IT WORKS </p>
+        			<br/>
+        			<p id="description">Momentum is calculated as the average of log returns over the rolling window. Positive value with sufficiently high magnitude results in a recommendation to buy; negative value with high magnitude results in a recommendation to sell. 
+					Using daily Bitcoin price data, the momentum algorithm learned that the optimal size window. Figure 8 below illustrates cumulative returns for window of four different sizes and shows that a strategies based on either 30 or 120-day momentum works better than others. As we will describe later in the report, this algorithm was used over the same time interval as the other models as a performance benchmark.
+					</p>
+        			<p id="description">Momentum has to be calculated over a specified size of “rolling window”. From a list of various window sizes, find the one that produces the highest results according to backtesting. Save the optimal window size and create a trader class that will fetch data real-time, find out the direction and magnitude of price movement, and make a recommendation to buy or sell Bitcoin. </p>
+        			<p id="description"> There are not many resources available to learn about quantitative trading. The industry appears quite secretive about their algorithms. However, many of the short-term trading strategies are based on the fundamental principle of momentum. It has been confirmed by academic research by Moskowitz et al. that a financial instrument that performed well/poorly will continue to do so.</p>
+        			<br/>
+        			<p id="description"> the figures on the left show how our prediction compared with the actual btc/usd prices after backtesting.</p>
+        		</div>
+        		<div class="col-sm-6" style="height: 100%;">
+        			<p class="sub-sub-heading" style="text-align: right;"> SAMPLE DATA & RESULTS </p>
+        			<div class="col-sm-12" style="text-align: center; height: 55% !important;">
+
+
+	        				<p style="text-decoration: underline;">plot showing returns for momentum trading over various window sizes</p>
+	        				<canvas id="other-strategy-chart" width="410" height="375" style="padding: 0px;"></canvas>
+
+	        		</div>
+        		</div>
+        	</div>       	
+
+
+
+        </div>
 
 	</body>
 
@@ -185,17 +284,13 @@
                 <div class="row">
                     <div class="footer-col col-md-6">
                         <h3>Address</h3>
-                        <p>3339 Spring Garden
-                            <br>Philadelphia, PA 19104</p>
+                        <p>Drexel University <br> 3141 Chestnut Street <br> Philadelphia, PA 19104</p>
                     </div>
                     <div class="footer-col col-md-6">
                         <h3>Social</h3>
                         <ul class="list-inline">
                             <li>
-                                <a href="" class="btn-social btn-outline"><span class="sr-only">Linked In</span><i class="fab fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a href="" class="btn-social btn-outline"><span class="sr-only">Github</span><i class="fab fa-github"></i></a>
+                                <a href="https://github.com/AgastyaSinha/Bitcoin-Price-Predictor" class="btn-social btn-outline"><span class="sr-only">Github</span><i class="fab fa-github"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -206,7 +301,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; Joseph Appeah 2017
+                        &copy; DREXEL COE, SENIOR DESIGN GROUP 11, 2018
                     </div>
                 </div>
             </div>
@@ -219,6 +314,7 @@
 <script type="text/javascript" src="js/charts.js"></script>
 
 <script type="text/javascript">
-	//setBitcoinStatus();
+	document.onload = setBitcoinStatus();
+	document.onload = getSampleTweets();		
 </script>
 

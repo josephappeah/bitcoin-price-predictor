@@ -8,6 +8,9 @@
 #	twitter api and then performs sentiment analysis on them. The 
 #	sentiment data is stored hourly and averaged out daily.
 
+import sys
+sys.path.insert(0, '../utils/')
+
 
 # requirements ======================================================
 import json
@@ -23,8 +26,8 @@ from flask import Flask
 from tweetcollector import *
 from tweetparser import *
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from apscheduler.schedulers.blocking import BlockingScheduler
 #====================================================================
-
 
 
 
@@ -46,7 +49,7 @@ def create_sentiment_json_dump():
 	'''
 
 	#
-	with open('hourly_sentiment_vals.csv') as hourly_sentiment_vals:
+	with open('../storage/hourly_sentiment_vals.csv') as hourly_sentiment_vals:
 
 		#
 		file_content 	= hourly_sentiment_vals.readlines()
@@ -56,7 +59,7 @@ def create_sentiment_json_dump():
 		
 		
 		# parse each line for date, hourly sentiments
-		for line in content[1:]:
+		for line in file_content[1:]:
 			#
 			line_parts 	= line.split(',')
 			day_entry  	= {}
@@ -84,28 +87,27 @@ def create_sentiment_json_dump():
 
 
 #
-def setInterval(func, time):
-	'''
-		runs the function 'func' every 'time' seconds
-	'''
-    e = threading.Event()
-    #
-    while not e.wait(time):
-    	#
-        store_parsed_data(obtain_tweet_sentiment(func()))
-
-
-#
 def write_stored_json_data_to_file(data):
 	'''
 		stores json data in memory to dump file 'sentiments.json'
 	'''
-	with open('sentiments.json', 'w') as outfile:
+	with open('../storage/sentiments.json', 'w') as outfile:
 		json.dump(data, outfile)
 
 
 #
+def store_as_sample_tweets(data):
+	with open('../storage/sample_tweets.txt', 'w') as outfile:
+		for item in data:
+			line = clean_tweet(item[1]) + "SPLIT-DELIMITER" + str(item[2]) + "\n"
+			outfile.write(line)
+
+
+#
 def store_parsed_data(data):
+	#
+	#store_as_sample_tweets(data)
+
 	#
 	hourly_average 	= get_average_sentiment_from_tweets(data)
 	today_date 		= datetime.datetime.now().strftime("%m/%d/%Y")
@@ -121,7 +123,7 @@ def store_parsed_data(data):
 		for hr in range(1,hour):
 			daily_sum += sentiment_data_json[current_max][hr]
 
-		sentiment_data_json[current_max]['daily_avg']   = round(float(daily_sum)/float(hour),2)
+		sentiment_data_json[current_max]['daily_avg']   = round(float(daily_sum)/float(hour),3)
 	else:
 		sentiment_data_json[current_max]				= {}
 		sentiment_data_json[current_max]['date']		= today_date 		
@@ -131,11 +133,18 @@ def store_parsed_data(data):
 	#
 	write_stored_json_data_to_file(sentiment_data_json)
 
+
+#
+def service():
+	store_parsed_data(obtain_tweet_sentiment(collect_tweets()))
 #====================================================================
 
 
 
 # run
+create_sentiment_json_dump()
 
-create_sentiment_json_dump() 
-setInterval(collect_tweets, 3600) #1 hr
+#
+scheduler = BlockingScheduler()
+scheduler.add_job(service, 'interval', hours=1)
+scheduler.start()

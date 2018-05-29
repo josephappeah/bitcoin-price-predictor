@@ -1,103 +1,58 @@
-server 			= "http://ec2-13-59-97-185.us-east-2.compute.amazonaws.com:3000";
+//===========================================================================================
+//server 			= "http://ec2-13-59-97-185.us-east-2.compute.amazonaws.com:3000";
+server 				= "http://localhost:3000";
 displayTweets 		= [];
-sentiment_text 		= "NEUTRAL";
-sentiment_color  	= "#FFC107";
-price_text 		= "$---";
-price_color  		= "#FFC107";
-prediction_text 	= "RISE";
-prediction_color  	= "#FFC107";
 
-function getTodaySentimentInformation() {
-	axios.get(server + "/get-todays-sentiments")
-	  .then(function (response) {
-	    console.log(response.data);
-	    updateChancesText(response.data.rating);
-	    updateTweetsOnHomepage(response.data.sentiments);
-	})
-	  .catch(function (error) {
-	    console.log(error);
-	});
-}
+//===========================================================================================
 
-//
+
+
+//utils =====================================================================================
+
+
+// update the predictions on the header with data from local storage
 function setBitcoinStatus(){
-	//document.getElementsByClassName("our-btc-sentiment").innerHTML 	= sentiment_text;
-	$(".our-btc-sentiment").text(sentiment_text);
-	$(".our-btc-sentiment").css("color", sentiment_color);
 
-	$(".our-btc-price").text(price_text);
-	$(".our-btc-price").css("color", price_color);
+	$(".our-btc-sentiment").text(localStorage.sentiment_text);
+	$(".our-btc-sentiment").css("color", localStorage.sentiment_color);
 
-	$(".our-btc-prediction").text(prediction_text);
-	$(".our-btc-prediction").css("color", prediction_color);
+	$(".our-btc-price").text(localStorage.price_text);
+	$(".our-btc-price").css("color", localStorage.price_color);
+
+	$(".our-btc-prediction").text(localStorage.prediction_text);
+	$(".our-btc-prediction").css("color", localStorage.prediction_color);
 }
 
 
-//
+// store the predictions obtained from the server to local storage
 function updatePredictions(price, sentiment, prediction) {
-
-	//
-	if (sentiment > 0.6) {
-		sentiment_text 	= "POSITIVE";
-		sentiment_color = "#00C853";
-	} else if (sentiment < 0.3) {
-		sentiment_text 	= "NEGATIVE";
-		sentiment_color = "#E53935";
-	} 
-	//
-
-
-	//
-
-	//
-	if (price != null) {
-		price_text 		= price;
-		price_color 	= "#00C853";
-	} 
-
-	//else if (sentiment < 0.3) {
-	//	sentiment_text 	= "LOW";
-	//	sentiment_color = "#E53935";
-	//} 
-	//
-
-
-
-	
-
-	//
-	if (prediction == true) {
-		prediction_text 	= "RISE";
-		prediction_color = "#00C853";
-	} else if (prediction == false) {
-		prediction_text 	= "FALL";
-		prediction_color = "#E53935";
-	} 
-	//
+		if (sentiment > 0.55) {
+			localStorage.sentiment_text 	= "POSITIVE";
+			localStorage.sentiment_color = "green";
+		} else if (sentiment < 0.3) {
+			localStorage.sentiment_text 	= "NEGATIVE";
+			localStorage.sentiment_color = "red";
+		} 
+		//
+		if (prediction == true) {
+			localStorage.price_text 		= price;
+			localStorage.price_color 	= "green";
+		} else {
+			localStorage.price_text 		= price;
+			localStorage.price_color 	= "red";			
+		}
+		//
+		if (prediction == true) {
+			localStorage.prediction_text 	= "RISE";
+			localStorage.prediction_color = "green";
+		} else if (prediction == false) {
+			localStorage.prediction_text 	= "FALL";
+			localStorage.prediction_color = "red";
+		} 
 }
 
-function updateChancesText(rating) {
 
-	//
-	chance = "MEDIUM";
-	color  = "#FFC107";
-
-	//
-	if (rating > 0.7) {
-		chance = "HIGH";
-		color  = "#00C853";
-	} else if (rating < 0.3) {
-		chance = "LOW";
-		color = "#E53935";
-	} 
-
-	//
-	document.getElementById("chance-text").innerHTML = chance;
-	$("#chance-text").css("color", color);
-	$(".chance-text").removeClass("blink");
-}
-
-//
+// scroll to a div on the webpage on button clicked
 function scrollToDiv(button_id, div_id){
 	$(document).ready(function(){
 		$("#"+ button_id).click(function(){
@@ -108,64 +63,73 @@ function scrollToDiv(button_id, div_id){
 	});
 }
 
+tweet_count = 1;
 
-//
+
+function updateTweetStore(tweets){
+	displayTweets[1] = createTweetCards(tweets[1]);
+	displayTweets[2] = createTweetCards(tweets[2]);
+	displayTweets[3] = createTweetCards(tweets[3]);
+	displayTweets[4] = createTweetCards(tweets[4]);
+
+
+}
+
+// update the webpage with sample tweet cards
 function updateTweetsOnHomepage(tweets) {
-	//
-	tweet_cards = '';
-
-	//
-	for (i = 0; i < tweets.length; i++) {
-		tweet_cards += createTweetCards(tweets[i]);
+	if (tweet_count == 4) {
+		tweet_count = 1;
 	}
 
-	//
-	document.getElementById('sample-tweet-cards').innerHTML = tweet_cards;
-	$("#loading-icon").removeClass('blink');
-
+	document.getElementById('sample-tweet-cards').innerHTML = displayTweets[tweet_count];
+	tweet_count+=1;
 }
 
 
-//
+// create sample tweet cards for the webpage
 function createTweetCards(tweet) {
 	//
-	return '<div class="animated slideInDown" id="tweet-display-card" class="col-sm-12">' +
-	        	'<div id="tweet-display-card-tweet" class="col-sm-9">' + 
-	        		'<p><i>"' + tweet[0] + '"</i></p>' + 
-	        	'</div>' + 
-	        	'<div id="tweet-display-card-rating" class="col-sm-3">' +
-	        		'<p>' + tweet[1] + '</p>' +
-	        	'</div>' +
-	        '</div>';
+	return '<div id="tweet-display-card" class="col-sm-12 animated zoomIn">' +
+			'<div id="tweet-display-card-tweet" class="col-sm-9">' +
+				'<p><i><b>"'+ tweet.tweet+'"</b></i></p>' + 
+			'</div>' + 
+			'<div id="tweet-display-card-rating" class="col-sm-3">' +
+				'<p><b>' + tweet.rating + '</b></p>' + 
+			'</div>' +
+		'</div>' +
+	'</div>' ; 
 }
 
-function blink_text() {
-    $('.blink').fadeOut(750);
-    $('.blink').fadeIn(750);
-}
 
 //
 $('#popoverData').popover();
 $('#popoverOption').popover({ trigger: "hover" });
 
 
-//
+// move page location to home
 function pushToHome(){
-	return new Promise (function(resolve, reject) {
-		window.location.href="home.html";
-		resolve(true);
-	})
-	
+	window.location.href="home.html";	
 }
 
+
+// start up the webapp. gets header predictions from the server
+function startUp(){
+	getTodaysPredictions();
+}
+//===========================================================================================
+
+
+
+
+//utils =====================================================================================
 //
-function getBitcoinStatus() {
-	axios.get(server + "/get-btc-status")
+function getTodaysPredictions() {
+	axios.get(server + "/get-todays-predictions")
 	  .then(function (response) {
-	    pushToHome()
-	    .then(function(){
-	    	updatePredictions(response.data.price, response.data.sentiment, response.data.prediction);
-	    })
+	    updatePredictions(response.data.price, response.data.sentiment, response.data.prediction);
+	    setInterval(function(){
+	    	pushToHome();
+	    },1000)
 	})
 	  .catch(function (error) {
 	    console.log(error);
@@ -173,14 +137,20 @@ function getBitcoinStatus() {
 }
 
 //
-function startUp(){
-	getBitcoinStatus();
+function getSampleTweets() {
+	axios.get(server + "/get-sample-tweets")
+	  .then(function (response) {
+	    updateTweetStore(response.data);
+	})
+	  .catch(function (error) {
+	    console.log(error);
+	});	
 }
-
+//===========================================================================================
 
 
 //
 //getTodaySentimentInformation();
 scrollToDiv('find-out-why', 'lstm-heading');
 scrollToDiv('about', 'lstm-heading');
-setInterval(blink_text, 1000);
+setInterval(updateTweetsOnHomepage, 3000);

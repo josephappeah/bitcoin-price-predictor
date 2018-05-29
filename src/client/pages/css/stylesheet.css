@@ -88,6 +88,7 @@ html, body{
 	margin-top: 0px !important;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
+	text-align: center !important;
 
     background-image: url('../imgs/btc-background.jpeg') ;
     background-color: rgba(237, 210, 104,0.6);/*rgba(255,255,255,0.6);*/
@@ -266,11 +267,11 @@ html, body{
 
 #tweet-display-card{
 	width: 90%;
-	height: 175px;
+	height: 150px;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	background: white;
 	margin:5% 5% 5% 5%;
-	font-size: 22px;
+	font-size: 12px;
 	border-radius: 7px;
 	color: #616161;
 	border: 1px solid #bdbdbd;
@@ -281,12 +282,13 @@ html, body{
 	text-align: left;
 	border-right: 1px solid #E0E0E0;
 	height: 100%;
+	word-wrap: break-word; 
 }
 
 #tweet-display-card-rating{
 	padding-top: 25px;
 	color: #616161 !important;
-	font-size: 26px !important;
+	font-size: 15px !important;
 }
 
 #section-divisions{
