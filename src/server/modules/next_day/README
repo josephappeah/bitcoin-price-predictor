@@ -1,0 +1,9 @@
+Step 1.) Run Polynomial Regression training: python multiftr_plyregNEXTDAY.py
+	a.) Will output "poly_NEXTDAY" CSV file
+	
+Step 2.) Perform Ensemble Learning: python ensemble_learningNEXTDAY.py
+	a.) Important: Need lstm_out and sentiment_out CSV files to be updated as well
+	b.) Saves final prediction in: ensemble_NEXTDAY
+
+Note: CSV files ordered by {Date(DD/MM/YYYY), actual price, predicted price} for LSTM and Poly
+      CSV files ordered vy {Date(DD/MM/YYYY), sentiment, sentiment gradient) for Sentiment prediction 

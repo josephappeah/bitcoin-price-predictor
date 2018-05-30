@@ -23,16 +23,23 @@ function setBitcoinStatus(){
 	$(".our-btc-prediction").css("color", localStorage.prediction_color);
 }
 
+function current_predictions() {
+	alert("OUR CURRENT SENTIMENT : " + localStorage.sentiment_text + "(" + localStorage.sentiment_value +  ")" + "\nOUR CURRENT PRICE : " + localStorage.price_text + "\nOUR CURRENT PREDICTION : " + localStorage.prediction_text)
+}
 
 // store the predictions obtained from the server to local storage
 function updatePredictions(price, sentiment, prediction) {
-		if (sentiment > 0.55) {
+		localStorage.sentiment_value = sentiment
+		if (sentiment >= 0.5) {
 			localStorage.sentiment_text 	= "POSITIVE";
 			localStorage.sentiment_color = "green";
 		} else if (sentiment < 0.3) {
 			localStorage.sentiment_text 	= "NEGATIVE";
 			localStorage.sentiment_color = "red";
-		} 
+		} else {
+			localStorage.sentiment_text = "NEUTRAL"
+			localStorage.sentiment_color = "#fed123";
+		}
 		//
 		if (prediction == true) {
 			localStorage.price_text 		= price;
@@ -77,7 +84,7 @@ function updateTweetStore(tweets){
 
 // update the webpage with sample tweet cards
 function updateTweetsOnHomepage(tweets) {
-	if (tweet_count == 4) {
+	if (tweet_count == 5) {
 		tweet_count = 1;
 	}
 
@@ -146,6 +153,29 @@ function getSampleTweets() {
 	    console.log(error);
 	});	
 }
+
+//
+function retrain() {
+	axios.get(server + "/retrain-modules")
+	  .then(function (response) {
+	    alert(response.data);
+	})
+	  .catch(function (error) {
+	    console.log(error);
+	});	
+}
+
+//
+function tomorrow_predictions(){
+	axios.get(server + "/get-nextday-predictions")
+	  .then(function (response) {
+	    alert("THE PREDICTED PRICE FOR TOMORROW IS : $" + response.data);
+	})
+	  .catch(function (error) {
+	    console.log(error);
+	});	
+}
+
 //===========================================================================================
 
 

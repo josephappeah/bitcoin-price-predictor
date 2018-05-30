@@ -73,7 +73,7 @@
 	        	</div>
 	        	<div class="col-sm-1"></div>
 	        </div>
-	        <div class="col-sm-12 animated slideInDown" style="text-align: center; margin-top: 13%;">
+	        <div class="col-sm-12 animated slideInDown" style="text-align: center; margin-top: 11%;">
         		<a id="find-out-why" href="#lstm-heading">MORE ABOUT OUR METRICS</a>
         	</div>
         </div><!--/ Header -->
@@ -93,26 +93,24 @@
 					<br/>
 					<hr/>
         			<br/>
-        			<p id="description"><b> the current prediction from our <a href="#lstm-heading"> lstm </a> module is $500</b></p>
+        			<p id="description"><b> the current prediction from our <a href="#polynomial-heading"> machine learning </a> modules is <span id="chance-text">$<span class="our-btc-price">100</span></span></b></p>
         			<br/>
-        			<p id="description"><b> the current prediction from our <a href="#polynomial-heading"> polynomial regression </a> module is $500</b></p>
-        			<br/>
-        			<p id="description"><b> based on our <a href="#sentiment-heading"> sentiment analysis </a> module, twitter sentiment is 0.5</b></p>
+        			<p id="description"><b> based on our <a href="#sentiment-heading"> sentiment analysis </a> module, twitter sentiment on bitcoin is currently <span id="chance-text" class="our-btc-sentiment">positive</span></b></p>
         		</div>
         		<div class="col-sm-6">
         			<p class="sub-sub-heading" style="text-align: justify;"> TEST OUR MODULES </p>
         			 <div class="col-sm-12" style="text-align: center; height: 55% !important;">
 
 			        <div class="col-sm-12 animated slideInDown" style="text-align: center; margin-top: 13%;">
-		        		<a id="find-out-why" href="#lstm-heading">RETRAIN OUR MACHINE LEARNING MODULES</a>
+		        		<a id="find-out-why" onclick="retrain()" >RETRAIN OUR MACHINE LEARNING MODULES</a>
 		        	</div>
 
 		        	<div class="col-sm-12 animated slideInDown" style="text-align: center; margin-top: 13%;">
-        				<a id="find-out-why" href="#lstm-heading">GET CURRENT PREDICTIONS</a>
+        				<a id="find-out-why" onclick="current_predictions()">GET CURRENT PREDICTIONS</a>
         			</div>
 
         			<div class="col-sm-12 animated slideInDown" style="text-align: center; margin-top: 13%;">
-        				<a id="find-out-why" href="#lstm-heading">GET TOMORROWS PREDICTION</a>
+        				<a id="find-out-why" onclick="tomorrow_predictions()" >GET TOMORROWS PREDICTION</a>
         			</div>
 
 	        		</div>

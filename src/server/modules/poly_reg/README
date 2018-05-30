@@ -1,0 +1,10 @@
+Step 1.) Run Polynomial Regression training: python multiftr_plyreg.py
+	a.) Will output poly_out CSV file
+	b.) Saves training and testing plots as PNG files
+	
+Step 2.) Perform Ensemble Learning: python ensemble_learning.py
+	a.) Saves prediction plots and percent returns as PNG files
+	b.) Important: Need lstm_out and sentiment_out CSV files to be updated as well
+
+Note: CSV files ordered by {Date(DD/MM/YYYY), actual price, predicted price} for LSTM and Poly
+      CSV files ordered vy {Date(DD/MM/YYYY), sentiment, sentiment gradient) for Sentiment prediction 
