@@ -3,15 +3,6 @@
 # desc 						: backend server for btc price predictor
 #========================================================================
 
-#========================================================================
-# to - do 
-#========================================================================
-'''
-- set up sample tweet server
-- set up sentiment provider
-- find sentiment json creation
-'''
-#========================================================================
 
 import sys
 sys.path.insert(0, '../utils/')
@@ -27,7 +18,7 @@ import glob
 import datetime
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from flask_cors import CORS
-#from tweetcollector import *
+from tweetcollector import *
 from tweetparser import *
 
 #
@@ -83,17 +74,36 @@ def get_sentiments():
 	#
 	return json.dumps(import_sentiments())
 
+#
+@app.route("/get-nextday-predictions")
+def get_nextday_prediction():
+	#
+	price 	= round(float(open('../modules/next_day/ensemble_NEXTDAY.txt','r').readline().rstrip()),2)
+	return str(price)
 
 #
 @app.route("/get-todays-predictions")
 def get_startup_utils():
 	#
-	#current_sentiment = float(get_average_sentiment_from_tweets(obtain_tweet_sentiment(collect_tweets())))
-	current_sentiment = 0
+	try:
+		current_sentiment 	= float(get_average_sentiment_from_tweets(obtain_tweet_sentiment(collect_tweets())))
+	except:
+		current_sentiment  	= 0.5
+
 	#
-	return json.dumps({"price" : 500, "sentiment" : current_sentiment, "prediction" : True})
+	price 				= round(float(open('../modules/next_day/ensemble_NEXTDAY.txt','r').readline().rstrip()),2)
+	
+	#
+	return json.dumps({"price" : price, "sentiment" : current_sentiment, "prediction" : True})
 
 
+#
+@app.route("/retrain-modules")
+def retrain_ml_modules():
+	#
+	return 'retraining ML modules'
+
+#
 @app.route("/get-current-sentiment-value")
 def get_current_sentiment_val():
 	#
@@ -126,8 +136,8 @@ def get_sentiment_data():
 	return json.dumps(result)
 
 #
-'''
+
 if __name__ == 'main':
 	app.run(port=server_port)
-'''
-app.run(port=server_port)
+
+#app.run(port=server_port)
